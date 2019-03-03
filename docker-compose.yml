@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "9090"
+    networks:
+      - webapp_network
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.webserver
+    ports:
+      - "80:80"
+    networks:
+      - webapp_network
+    depends_on:
+      - app
+
+networks:
+  webapp_network:
